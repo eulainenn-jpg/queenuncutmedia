@@ -154,34 +154,52 @@
   .channel-body p{font-size:15px;line-height:1.6;color:var(--ink-soft);flex:1;margin:0;}
   .channel-card .btn{align-self:flex-start;}
 
-  /* ---------- VIDEOS (contents index) ---------- */
-  .index-list{border-top:2px solid var(--ink);}
-  .index-row{
-        display:grid;grid-template-columns:64px 1fr auto auto;align-items:center;gap:22px;
-    padding:20px 4px;border-bottom:2px solid var(--ink);
-    transition:background .15s ease, padding-left .15s ease;
+  /* ---------- VIDEOS (carousel) ---------- */
+  .videos .section-head{
+        display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    max-width:none;margin-bottom:36px;
 }
-  .index-row:hover{background:var(--blush);padding-left:14px;}
-  .index-num{font-family:'Anton',sans-serif;font-size:26px;color:var(--hot);font-variant-numeric:tabular-nums;}
-  .index-title{min-width:0;}
-  .index-title .video-chan{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--wine);}
-  .index-title h4{font-family:'Manrope',sans-serif;font-weight:700;font-size:17px;line-height:1.4;margin:6px 0 0;color:var(--ink);text-wrap:balance;}
-  .index-show{
-        font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
-    padding:5px 12px;border:2px solid var(--ink);white-space:nowrap;
+  .carousel-nav{display:flex;gap:10px;}
+  .carousel-nav button{
+        width:44px;height:44px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    transition:background .15s ease,color .15s ease;
 }
-  .index-play{
-        width:38px;height:38px;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;flex:none;
-    transition:background .15s ease, color .15s ease;
+  .carousel-nav button:hover{background:var(--ink);color:var(--paper);}
+  .carousel-nav button svg{width:18px;height:18px;}
+  .carousel-nav button:disabled{opacity:.3;cursor:default;pointer-events:none;}
+  .carousel-viewport{position:relative;margin:0 -28px;padding:0 28px;}
+  .carousel-track{
+        display:flex;gap:22px;overflow-x:auto;
+    scroll-snap-type:x mandatory;scroll-behavior:smooth;
+    padding-bottom:6px;-ms-overflow-style:none;scrollbar-width:none;
 }
-  .index-play svg{width:15px;height:15px;}
-  .index-row:hover .index-play{background:var(--ink);color:var(--paper);}
+  .carousel-track::-webkit-scrollbar{display:none;}
+  .vid-card{
+        flex:0 0 300px;scroll-snap-align:start;background:var(--paper);
+    border:2px solid var(--ink);display:flex;flex-direction:column;
+    transition:transform .18s ease;
+}
+  .vid-card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink);}
+  .vid-card .thumb{position:relative;aspect-ratio:16/9;overflow:hidden;border-bottom:2px solid var(--ink);background:var(--ink);}
+  .vid-card .thumb img{width:100%;height:100%;object-fit:cover;}
+  .vid-card .thumb .play{
+        position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(180deg, rgba(21,6,16,0) 55%, rgba(21,6,16,.55) 100%);
+}
+  .vid-card .thumb .play svg{width:52px;height:52px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.4));opacity:.95;transition:transform .15s ease;}
+  .vid-card:hover .thumb .play svg{transform:scale(1.12);}
+  .vid-card .thumb .show-tag{
+        position:absolute;top:10px;left:10px;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+    padding:5px 10px;background:var(--hot);color:var(--paper);
+}
+  .vid-card .vid-body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:6px;flex:1;}
+  .vid-card .video-chan{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--wine);}
+  .vid-card h4{font-family:'Manrope',sans-serif;font-weight:700;font-size:15.5px;line-height:1.4;margin:0;color:var(--ink);text-wrap:balance;}
+  .progress-rail{height:4px;background:var(--line);margin-top:28px;position:relative;}
+  .progress-fill{position:absolute;top:0;left:0;height:100%;background:var(--hot);width:20%;transition:width .1s linear;}
   @media (max-width:640px){
-    .index-row{grid-template-columns:34px 1fr;grid-template-areas:"num title" ". show" ". play";row-gap:10px;}
-    .index-num{grid-area:num;font-size:20px;}
-    .index-title{grid-area:title;}
-    .index-show{grid-area:show;justify-self:start;}
-    .index-play{grid-area:play;justify-self:start;}
+    .vid-card{flex-basis:240px;}
 }
 
   /* ---------- FOLLOW STRIP ---------- */
@@ -409,75 +427,130 @@
     <section class="videos" id="videos">
       <div class="wrap">
         <div class="section-head">
-          <p class="eyebrow">ON REPLAY</p>
-          <h2>Latest from the queendom</h2>
+          <div>
+            <p class="eyebrow">ON REPLAY</p>
+            <h2>Latest from the queendom</h2>
+          </div>
+          <div class="carousel-nav">
+            <button id="vidPrev" aria-label="Previous video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button id="vidNext" aria-label="Next video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          </div>
         </div>
-        <div class="index-list">
 
-          <a class="index-row" href="https://www.youtube.com/watch?v=vBsihFuC6nY" target="_blank" rel="noopener">
-            <span class="index-num">01</span>
-            <span class="index-title"><span class="video-chan">The Reality Recap</span><h4>Serayah &amp; Joey Bada$$ Split, ITV's Brand Deal Cut &amp; Simba + Angie Tell All</h4></span>
-            <span class="index-show">Podcast</span>
-            <span class="index-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-          </a>
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="vidTrack">
 
-          <a class="index-row" href="https://www.youtube.com/watch?v=2TeTO8GnkOA" target="_blank" rel="noopener">
-            <span class="index-num">02</span>
-            <span class="index-title"><span class="video-chan">The Queen E</span><h4>Whose Side Are You On? | Love Island USA (S8 Ep 36 &ndash; The Reunion)</h4></span>
-          <span class="index-show">Recap</span>
-            <span class="index-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-          </a>
+            <a class="vid-card" href="https://www.youtube.com/watch?v=vBsihFuC6nY" target="_blank" rel="noopener">
+              <div class="thumb">
+                <img src="https://img.youtube.com/vi/vBsihFuC6nY/hqdefault.jpg" alt="" loading="lazy">
+                <span class="show-tag">Podcast</span>
+                <div class="play"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+              </div>
+              <div class="vid-body">
+                <span class="video-chan">The Reality Recap</span>
+                <h4>Serayah &amp; Joey Bada$$ Split, ITV's Brand Deal Cut &amp; Simba + Angie Tell All</h4>
+              </div>
+            </a>
 
-          <a class="index-row" href="https://www.youtube.com/watch?v=8Gjpu7p3-Tk" target="_blank" rel="noopener">
-            <span class="index-num">03</span>
-            <span class="index-title"><span class="video-chan">The Reality Recap</span><h4>Keke Palmer Backlash, Love Island Amaya's New Face &amp; MAFS Courtney Speaks Out</h4></span>
-            <span class="index-show">Podcast</span>
-            <span class="index-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-          </a>
+            <a class="vid-card" href="https://www.youtube.com/watch?v=2TeTO8GnkOA" target="_blank" rel="noopener">
+              <div class="thumb">
+                <img src="https://img.youtube.com/vi/2TeTO8GnkOA/hqdefault.jpg" alt="" loading="lazy">
+                <span class="show-tag">Recap</span>
+                <div class="play"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+              </div>
+              <div class="vid-body">
+                <span class="video-chan">The Queen E</span>
+                <h4>Whose Side Are You On? | Love Island USA (S8 Ep 36 &ndash; The Reunion)</h4>
+              </div>
+            </a>
 
-          <a class="index-row" href="https://www.youtube.com/watch?v=BRjSlYy0sw4" target="_blank" rel="noopener">
-            <span class="index-num">04</span>
-            <span class="index-title"><span class="video-chan">The Reality Recap</span><h4>Jools LeBron and Drew Afualo Are Spiraling + Is NicOlandria Back?</h4></span>
-          <span class="index-show">Podcast</span>
-          <span class="index-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-          </a>
+            <a class="vid-card" href="https://www.youtube.com/watch?v=8Gjpu7p3-Tk" target="_blank" rel="noopener">
+              <div class="thumb">
+                <img src="https://img.youtube.com/vi/8Gjpu7p3-Tk/hqdefault.jpg" alt="" loading="lazy">
+                <span class="show-tag">Podcast</span>
+                <div class="play"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+              </div>
+              <div class="vid-body">
+                <span class="video-chan">The Reality Recap</span>
+                <h4>Keke Palmer Backlash, Love Island Amaya's New Face &amp; MAFS Courtney Speaks Out</h4>
+              </div>
+            </a>
 
-          <a class="index-row" href="https://www.youtube.com/watch?v=ExDz-sJvTJ4" target="_blank" rel="noopener">
-            <span class="index-num">05</span>
-            <span class="index-title"><span class="video-chan">Queen Uncut</span><h4>Chit Chat GRWM: Ozempic, Moving To LA &amp; Long Distance Marriage!</h4></span>
-            <span class="index-show">Vlog</span>
-            <span class="index-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-          </a>
+            <a class="vid-card" href="https://www.youtube.com/watch?v=BRjSlYy0sw4" target="_blank" rel="noopener">
+              <div class="thumb">
+                <img src="https://img.youtube.com/vi/BRjSlYy0sw4/hqdefault.jpg" alt="" loading="lazy">
+                <span class="show-tag">Podcast</span>
+                <div class="play"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+              </div>
+              <div class="vid-body">
+                <span class="video-chan">The Reality Recap</span>
+                <h4>Jools LeBron and Drew Afualo Are Spiraling + Is NicOlandria Back?</h4>
+              </div>
+            </a>
 
-          <a class="index-row" href="https://www.youtube.com/watch?v=krGXp_m63_k" target="_blank" rel="noopener">
-            <span class="index-num">06</span>
-            <span class="index-title"><span class="video-chan">Queen Uncut</span><h4>So I "Crashed" Another Wedding... | Jamaica Vlog</h4></span>
-            <span class="index-show">Vlog</span>
-            <span class="index-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-          </a>
+            <a class="vid-card" href="https://www.youtube.com/watch?v=ExDz-sJvTJ4" target="_blank" rel="noopener">
+              <div class="thumb">
+                <img src="https://img.youtube.com/vi/ExDz-sJvTJ4/hqdefault.jpg" alt="" loading="lazy">
+                <span class="show-tag">Vlog</span>
+                <div class="play"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+              </div>
+              <div class="vid-body">
+                <span class="video-chan">Queen Uncut</span>
+                <h4>Chit Chat GRWM: Ozempic, Moving To LA &amp; Long Distance Marriage!</h4>
+              </div>
+            </a>
 
-          <a class="index-row" href="https://www.youtube.com/watch?v=dMRrQ9T_M80" target="_blank" rel="noopener">
-            <span class="index-num">07</span>
-            <span class="index-title"><span class="video-chan">The Queen E</span><h4>Ciara Gets Emotional At The Reunion | Love Is Blind UK (S3 Ep 11)</h4></span>
-            <span class="index-show">Recap</span>
-            <span class="index-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-          </a>
+            <a class="vid-card" href="https://www.youtube.com/watch?v=krGXp_m63_k" target="_blank" rel="noopener">
+              <div class="thumb">
+                <img src="https://img.youtube.com/vi/krGXp_m63_k/hqdefault.jpg" alt="" loading="lazy">
+                <span class="show-tag">Vlog</span>
+                <div class="play"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+              </div>
+              <div class="vid-body">
+                <span class="video-chan">Queen Uncut</span>
+                <h4>So I "Crashed" Another Wedding... | Jamaica Vlog</h4>
+              </div>
+            </a>
 
-          <a class="index-row" href="https://www.youtube.com/watch?v=3bDdRcTNlBA" target="_blank" rel="noopener">
-            <span class="index-num">08</span>
-            <span class="index-title"><span class="video-chan">Queen Uncut</span><h4>Everything We Did On Our Cape Town Honeymoon!</h4></span>
-            <span class="index-show">Vlog</span>
-            <span class="index-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-          </a>
+            <a class="vid-card" href="https://www.youtube.com/watch?v=dMRrQ9T_M80" target="_blank" rel="noopener">
+              <div class="thumb">
+                <img src="https://img.youtube.com/vi/dMRrQ9T_M80/hqdefault.jpg" alt="" loading="lazy">
+                <span class="show-tag">Recap</span>
+                <div class="play"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+              </div>
+              <div class="vid-body">
+                <span class="video-chan">The Queen E</span>
+                <h4>Ciara Gets Emotional At The Reunion | Love Is Blind UK (S3 Ep 11)</h4>
+              </div>
+            </a>
 
-          <a class="index-row" href="https://www.youtube.com/watch?v=pOtPHOKhLZ8" target="_blank" rel="noopener">
-            <span class="index-num">09</span>
-            <span class="index-title"><span class="video-chan">The Queen E</span><h4>Get Over Yourself Adam!! | Married At First Sight (S20 Ep19 &amp; 20)</h4></span>
-            <span class="index-show">Recap</span>
-            <span class="index-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-          </a>
+            <a class="vid-card" href="https://www.youtube.com/watch?v=3bDdRcTNlBA" target="_blank" rel="noopener">
+              <div class="thumb">
+                <img src="https://img.youtube.com/vi/3bDdRcTNlBA/hqdefault.jpg" alt="" loading="lazy">
+                <span class="show-tag">Vlog</span>
+                <div class="play"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+              </div>
+              <div class="vid-body">
+                <span class="video-chan">Queen Uncut</span>
+                <h4>Everything We Did On Our Cape Town Honeymoon!</h4>
+              </div>
+            </a>
 
+            <a class="vid-card" href="https://www.youtube.com/watch?v=pOtPHOKhLZ8" target="_blank" rel="noopener">
+              <div class="thumb">
+                <img src="https://img.youtube.com/vi/pOtPHOKhLZ8/hqdefault.jpg" alt="" loading="lazy">
+                <span class="show-tag">Recap</span>
+                <div class="play"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+              </div>
+              <div class="vid-body">
+                <span class="video-chan">The Queen E</span>
+                <h4>Get Over Yourself Adam!! | Married At First Sight (S20 Ep19 &amp; 20)</h4>
+              </div>
+            </a>
+
+          </div>
         </div>
+        <div class="progress-rail"><div class="progress-fill" id="vidProgress"></div></div>
       </div>
     </section>
 
@@ -585,3 +658,33 @@
   
         <a class="btn light" href="https://www.youtube.com/@TheRealityRecapPod/podcasts" target="_blank" rel="noopener">
             Listen to The Reality Recap
+<script>
+(function(){
+  var track = document.getElementById('vidTrack');
+  var prevBtn = document.getElementById('vidPrev');
+  var nextBtn = document.getElementById('vidNext');
+  var fill = document.getElementById('vidProgress');
+  if(!track) return;
+
+  function cardStep(){
+    var card = track.querySelector('.vid-card');
+    var style = getComputedStyle(track);
+    var gap = parseFloat(style.gap) || 22;
+    return card ? card.getBoundingClientRect().width + gap : 300;
+  }
+
+  if(prevBtn) prevBtn.addEventListener('click', function(){ track.scrollBy({left: -cardStep()*2, behavior:'smooth'}); });
+  if(nextBtn) nextBtn.addEventListener('click', function(){ track.scrollBy({left: cardStep()*2, behavior:'smooth'}); });
+
+  function updateProgress(){
+    var max = track.scrollWidth - track.clientWidth;
+    var pct = max > 0 ? (track.scrollLeft / max) * 100 : 0;
+    if(fill) fill.style.width = Math.max(6, pct) + '%';
+    if(prevBtn) prevBtn.disabled = track.scrollLeft <= 2;
+    if(nextBtn) nextBtn.disabled = track.scrollLeft >= max - 2;
+  }
+  track.addEventListener('scroll', updateProgress, {passive:true});
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+})();
+</script>
