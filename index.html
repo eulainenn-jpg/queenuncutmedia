@@ -1,4 +1,5 @@
 <title>Queen Uncut Media</title>
+<link rel="icon" type="image/png" href="logoblack.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap');
 
@@ -83,7 +84,9 @@
     clip-path:polygon(0 0,100% 0,100% 90%,0 100%);
     padding:88px 0 150px;
   }
-  .hero .wrap{position:relative;z-index:2;}
+  .hero .wrap{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+  .hero-copy{flex:1 1 480px;}
+  .hero-logo{width:260px;max-width:34vw;height:auto;flex:none;filter:drop-shadow(0 18px 30px rgba(0,0,0,.35));}
   .hero .eyebrow{color:var(--blush);}
   .hero h1{
         font-size:clamp(52px,9vw,118px);
@@ -195,6 +198,8 @@
     transition:background .15s ease;
 }
   .follow-tile:hover{background:var(--ink-soft);}
+  .follow-tile-empty{pointer-events:none;}
+  .follow-tile-empty:hover{background:var(--ink);}
   .follow-tile svg{width:26px;height:26px;color:var(--hot-2);}
   .follow-tile b{font-family:'Anton',sans-serif;font-size:17px;letter-spacing:.01em;font-weight:400;text-transform:none;}
   .follow-tile span{font-size:13px;color:#e6bdd2;}
@@ -215,13 +220,12 @@
 }
   .shop-price{font-family:'Anton',sans-serif;font-size:15px;margin-bottom:22px;color:var(--blush);}
   .shop-visual{
-        aspect-ratio:4/5;border:2px solid rgba(255,255,255,.6);
-    display:flex;align-items:center;justify-content:center;position:relative;
-    background:rgba(0,0,0,.12);
+        aspect-ratio:4/5;
+    position:relative;
+    display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:14px;
+    padding:14px;
 }
-  .shop-visual svg{width:44%;height:44%;color:rgba(255,255,255,.85);}
-  .shop-visual::before,.shop-visual::after{content:"";position:absolute;border:2px solid rgba(255,255,255,.35);}
-  .shop-visual::before{inset:16px;}
+  .shop-visual img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,.25));transform:scale(1.15);}
 
       /* ---------- CONTACT ---------- */
       .contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
@@ -260,6 +264,7 @@
     .follow-grid{grid-template-columns:repeat(2,1fr);}
     .monogram{max-width:220px;margin:0 auto;}
     section{padding:70px 0;}
+    .hero-logo{display:none;}
 }
 </style>
 
@@ -295,19 +300,22 @@
     <!-- ============ HERO ============ -->
     <section class="hero">
       <div class="wrap">
-        <p class="eyebrow">QUEEN UNCUT MEDIA PRESENTS</p>
-        <h1>
-          <span>REALITY TV.</span>
-          <span>NO FILTER.</span>
-        </h1>
-                <p class="lede">The home of reality tv, recaps, and real talk!</p>
-        <div class="cta-row">
-          <a class="btn light" href="https://www.youtube.com/@TheQueenE" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Watch on YouTube
-        </a>
+        <div class="hero-copy">
+          <p class="eyebrow">QUEEN UNCUT MEDIA PRESENTS</p>
+          <h1>
+            <span>REALITY TV.</span>
+            <span>NO FILTER.</span>
+          </h1>
+          <p class="lede">The home of reality tv, recaps, and real talk!</p>
+          <div class="cta-row">
+            <a class="btn light" href="https://www.youtube.com/@TheQueenE" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Watch on YouTube
+            </a>
+          </div>
+        </div>
+        <img class="hero-logo" src="logoblack.png" alt="Queen Uncut Media crown logo">
       </div>
-    </div>
-  </section>
+    </section>
 
   <!-- ============ STATS ============ -->
   <div class="stats">
@@ -328,7 +336,7 @@
         </div>
         <div class="about-copy">
           <p class="eyebrow">ABOUT THE QUEENDOM</p>
-          <h2 style="margin:12px 0 22px;">Personality-driven media, built for reality TV fans</h2>
+          <h2 style="margin:12px 0 22px;">Personality-driven media</h2>
         <p>Queen Uncut Media is a digital media and entertainment business run by Queen E (aka Eulaine Ndhlovu-Odoom). The business operates the <strong>TheQueenE</strong> and <strong>QueenUncut</strong> YouTube channels, along with the <strong>Reality Recap Podcast</strong>, delivering entertainment and reality TV commentary, pop-culture conversations, and unfiltered personal content such as story-times and weekly vlogs.</p>
         <p>We've built an engaged community by providing entertaining and relatable perspectives on trending entertainment and reality television topics. If you love witty commentary with a side of shade, you're in the right place!</p>
         <p class="pullquote">"Where reality TV gets the royal treatment."</p>
@@ -476,6 +484,28 @@
       </div>
     </section>
 
+    <!-- ============ SHOP ============ -->
+    <section class="shop" id="shop">
+      <div class="wrap">
+        <div>
+          <p class="eyebrow">THE QUEEN E SHOP</p>
+          <h2>Shop the collection</h2>
+        <p class="lede">Graphic tees carrying the catchphrases you already quote back &mdash; from Instagram captions to community inside jokes, now on cotton.</p>
+        <div class="drop-tags">
+          <span>Uh Uh</span><span>Reach</span><span>To Me</span><span>To You</span>
+          </div>
+          <p class="shop-price">Starting at $35.17 CAD</p>
+        <a class="btn light" href="https://queen-e-shop.fourthwall.com/en-cad" target="_blank" rel="noopener">Shop The Collection</a>
+      </div>
+      <div class="shop-visual">
+        <img src="shop-uhuh.webp" alt="Uh Uh design">
+        <img src="shop-reach.webp" alt="That's A Reach design">
+        <img src="shop-tome.webp" alt="To Me design">
+        <img src="shop-toyou.webp" alt="To You design">
+      </div>
+      </div>
+    </section>
+
     <!-- ============ FOLLOW STRIP ============ -->
     <section class="follow">
       <div class="wrap">
@@ -500,26 +530,19 @@
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3c.5 2.3 2 3.8 4.5 4v2.6c-1.6.1-3-.4-4.5-1.4v6.4a5.4 5.4 0 1 1-5.4-5.4c.3 0 .6 0 .9.1v2.7a2.7 2.7 0 1 0 1.9 2.6V3h2.6z"/></svg>
             <b>TikTok</b><span>@queenuncut</span>
           </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ SHOP ============ -->
-    <section class="shop" id="shop">
-      <div class="wrap">
-        <div>
-          <p class="eyebrow">THE QUEEN E SHOP</p>
-          <h2>Shop the collection</h2>
-        <p class="lede">Graphic tees carrying the catchphrases you already quote back &mdash; from Instagram captions to community inside jokes, now on cotton.</p>
-        <div class="drop-tags">
-          <span>Uh Uh</span><span>Reach</span><span>To Me</span><span>To You</span>
-          </div>
-          <p class="shop-price">Starting at $35.17 CAD</p>
-        <a class="btn light" href="https://queen-e-shop.fourthwall.com/en-cad" target="_blank" rel="noopener">Shop The Collection</a>
-      </div>
-      <div class="shop-visual">
-                <img src="1.png" alt="Queen Uncut Media merch design" style="width:100%;height:100%;object-fit:cover;">
-        
+          <a class="follow-tile" href="https://open.spotify.com/show/033SZj1pIWpIPBHIOFfK19?si=-MngWSQ0QfeZKAe24L7TgA&amp;utm_source=copy-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9.3"/><path d="M6.6 9.7c3.6-1 7.9-.8 10.8.9" stroke-linecap="round"/><path d="M7.1 13c3-.8 6.5-.6 9 .9" stroke-linecap="round"/><path d="M7.7 16.1c2.4-.6 5-.5 7 .7" stroke-linecap="round"/></svg>
+            <b>Spotify</b><span>Reality Recap with Queen E</span>
+          </a>
+          <a class="follow-tile" href="https://podcasts.apple.com/us/podcast/reality-recap-with-queen-e/id6793189449?at=1000lHKX&amp;ct=linktree_http&amp;itsct=lt_p&amp;itscg=30200&amp;ls=1" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.3"/><circle cx="12" cy="12" r="5.6"/><circle cx="12" cy="9.7" r="1.5" fill="currentColor" stroke="none"/><path d="M9.3 20.2l1.1-5.9a2 2 0 0 1 3.2 0l1.1 5.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <b>Apple Podcasts</b><span>Reality Recap with Queen E</span>
+          </a>
+          <a class="follow-tile" href="https://a.co/d/05N4JnCT" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6.5 8.2h11l1 12.3a1.4 1.4 0 0 1-1.4 1.5H6.9a1.4 1.4 0 0 1-1.4-1.5l1-12.3z" stroke-linejoin="round"/><path d="M9 8.2a3 3 0 0 1 6 0" stroke-linecap="round"/></svg>
+            <b>Amazon Storefront</b><span>Shop Queen E's picks</span>
+          </a>
+          <div class="follow-tile follow-tile-empty" aria-hidden="true"></div>
         </div>
       </div>
     </section>
