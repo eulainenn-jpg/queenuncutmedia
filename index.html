@@ -117,6 +117,22 @@
   }
   .stat span{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#f0d7e2;}
 
+  /* ---------- FEATURED ON ---------- */
+  .featured-on{background:var(--paper-dim);padding:52px 0;}
+  .featured-label{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:30px;}
+  .featured-label .line{height:1px;width:56px;background:rgba(52,19,39,.22);}
+  .featured-label span{font-family:'Manrope',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);opacity:.72;}
+  .featured-logos{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:32px 72px;}
+  .featured-logos img{display:block;width:auto;opacity:.82;}
+  .featured-logos .logo-bustle{height:42px;}
+  .featured-logos .logo-unwell{height:52px;}
+  @media (max-width:640px){
+    .featured-on{padding:40px 0;}
+    .featured-logos{gap:22px 40px;}
+    .featured-logos .logo-bustle{height:32px;}
+    .featured-logos .logo-unwell{height:40px;}
+  }
+
   /* ---------- SECTION SHELL ---------- */
   section{padding:100px 0;}
   .section-head{max-width:640px;margin-bottom:56px;}
@@ -350,6 +366,21 @@
         <div class="stat"><b>Weekly</b><span>New Reality Recap Episodes</span></div>
       </div>
     </div>
+
+  <!-- ============ FEATURED ON ============ -->
+  <section class="featured-on">
+    <div class="wrap">
+      <div class="featured-label">
+        <span class="line"></span>
+        <span>Featured On</span>
+        <span class="line"></span>
+      </div>
+      <div class="featured-logos">
+        <img class="logo-bustle" src="bustle.png" alt="Bustle" loading="lazy">
+        <img class="logo-unwell" src="unwell-network.png" alt="Unwell Network" loading="lazy">
+      </div>
+    </div>
+  </section>
 
     <!-- ============ ABOUT ============ -->
     <section class="about" id="about">
