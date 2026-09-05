@@ -126,6 +126,7 @@
   .about .wrap{display:grid;grid-template-columns:1.3fr 1.2fr;gap:64px;align-items:center;}
   .monogram{
     display:flex;align-items:center;justify-content:center;
+    position:relative;
 }
     .monogram img{width:100%;height:auto;display:block;}
   .about-copy p{font-size:17px;line-height:1.75;color:var(--ink-soft);}
@@ -353,10 +354,10 @@
     <!-- ============ ABOUT ============ -->
     <section class="about" id="about">
       <img class="heart" src="heart-black.png" alt="" style="width:90px; top:24px; left:27px; transform:rotate(-16deg) scaleX(-1); opacity:0.9;">
-      <img class="heart" src="heart-black.png" alt="" style="width:80px; bottom:25px; right:28px; transform:rotate(-20deg); opacity:0.85;">
       <div class="wrap">
         <div class="monogram">
                   <img src="queen-e-about-full.webp" alt="Queen E">
+                  <img class="heart" src="heart-pink.png" alt="" style="width:78px; bottom:-18px; left:-18px; transform:rotate(-12deg); opacity:0.95; z-index:6;">
         </div>
         <div class="about-copy">
           <p class="eyebrow">ABOUT THE QUEENDOM</p>
@@ -377,7 +378,7 @@
     <!-- ============ CHANNELS ============ -->
     <section class="channels" id="channels">
       <img class="heart" src="heart-black.png" alt="" style="width:85px; top:24px; right:26px; transform:rotate(16deg) scaleX(-1); opacity:0.85;">
-      <img class="heart" src="heart-black.png" alt="" style="width:70px; bottom:21px; left:23px; transform:rotate(-14deg); opacity:0.85;">
+      <img class="heart" src="heart-black.png" alt="" style="width:70px; bottom:40px; left:215px; transform:rotate(-14deg); opacity:0.85;">
       <div class="wrap">
         <div class="section-head">
           <p class="eyebrow">THE LINEUP</p>
@@ -571,7 +572,6 @@
     <!-- ============ SHOP ============ -->
     <section class="shop" id="shop">
       <img class="heart" src="heart-white.png" alt="" style="width:100px; top:29px; left:32px; transform:rotate(-18deg) scaleX(-1); opacity:0.9;">
-      <img class="heart" src="heart-black.png" alt="" style="width:80px; bottom:22px; right:24px; transform:rotate(-14deg); opacity:0.85;">
       <div class="wrap">
         <div>
           <p class="eyebrow">THE QUEEN E SHOP</p>
@@ -581,7 +581,10 @@
           <span>Uh Uh</span><span>Reach</span><span>To Me</span><span>To You</span>
           </div>
           <p class="shop-price">Starting at $35.17 CAD</p>
-        <a class="btn light" href="https://queen-e-shop.fourthwall.com/en-cad" target="_blank" rel="noopener">Shop The Collection</a>
+        <span style="position:relative; display:inline-block;">
+          <a class="btn light" href="https://queen-e-shop.fourthwall.com/en-cad" target="_blank" rel="noopener">Shop The Collection</a>
+          <img class="heart" src="heart-black.png" alt="" style="width:46px; bottom:-14px; right:-14px; transform:rotate(-14deg); opacity:0.9; z-index:6;">
+        </span>
       </div>
       <div class="shop-visual">
         <img src="shop-uhuh.webp" alt="Uh Uh design">
@@ -628,7 +631,9 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6.5 8.2h11l1 12.3a1.4 1.4 0 0 1-1.4 1.5H6.9a1.4 1.4 0 0 1-1.4-1.5l1-12.3z" stroke-linejoin="round"/><path d="M9 8.2a3 3 0 0 1 6 0" stroke-linecap="round"/></svg>
             <b>Amazon Storefront</b><span>Shop Queen E's picks</span>
           </a>
-          <div class="follow-tile follow-tile-empty" aria-hidden="true"></div>
+          <div class="follow-tile follow-tile-empty" aria-hidden="true" style="align-items:center;justify-content:center;">
+            <img src="heart-white.png" alt="" style="width:56px; opacity:0.9;">
+          </div>
         </div>
       </div>
     </section>
@@ -638,7 +643,7 @@
       <div class="wrap">
         <div>
           <p class="eyebrow">WORK WITH ME</p>
-          <h2>Let's collaborate</h2>
+          <h2>Let's collaborat<span style="position:relative; display:inline-block;">e<img class="heart" src="heart-pink.png" alt="" style="width:26px; top:-16px; left:2px; transform:rotate(-8deg); opacity:0.95; z-index:6;"></span></h2>
                               <p>If Queen Generated Content (UGC) is what you’re looking for, I’m at your service! The Queendom welcomes all Reality TV press/collabs, Travel partnerships, and Lifestyle and Beauty sponsorships.</p>
         <div class="cta-row">
           <a class="btn ghost" href="https://www.instagram.com/eulain.e/" target="_blank" rel="noopener">DM on Instagram</a>
@@ -647,9 +652,9 @@
         </div>
         <div class="contact-card">
           <div class="row"><span>Email</span><a href="mailto:hello@queenuncutmedia.com">hello@queenuncutmedia.com</a></div>
-          <div class="row"><span>The Queen E</span><a href="https://www.youtube.com/@TheQueenE" target="_blank" rel="noopener">YouTube &rarr;</a></div>
+          <div class="row"><span>Queen E</span><a href="https://www.youtube.com/@TheQueenE" target="_blank" rel="noopener">YouTube &rarr;</a></div>
           <div class="row"><span>Queen Uncut</span><a href="https://www.youtube.com/@QueenUncut" target="_blank" rel="noopener">YouTube &rarr;</a></div>
-          <div class="row"><span>The Reality Recap</span><a href="https://www.youtube.com/@TheRealityRecapPod" target="_blank" rel="noopener">YouTube &rarr;</a></div>
+          <div class="row"><span>Reality Recap</span><a href="https://www.youtube.com/@TheRealityRecapPod" target="_blank" rel="noopener">YouTube &rarr;</a></div>
           <div class="row"><span>Shop</span><a href="https://queen-e-shop.fourthwall.com/en-cad" target="_blank" rel="noopener">Fourthwall &rarr;</a></div>
         </div>
       </div>
