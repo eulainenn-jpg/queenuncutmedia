@@ -303,6 +303,24 @@
   header.site,.stats{overflow:hidden;}
   .about,.channels,.shop,footer{position:relative;overflow:hidden;}
   @media (max-width:900px){ .heart{display:none;} }
+
+  /* ---------- BACK TO TOP ---------- */
+  .back-to-top{
+    position:fixed;right:24px;bottom:28px;z-index:100;
+    display:flex;align-items:center;justify-content:center;
+    width:56px;height:56px;border-radius:50%;
+    background:var(--paper);color:var(--wine);
+    border:2px solid var(--blush);
+    box-shadow:0 10px 24px rgba(110,14,58,.18);
+    cursor:pointer;
+    opacity:0;transform:translateY(16px) scale(.9);
+    pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease, border-color .15s ease, color .15s ease;
+  }
+  .back-to-top.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+  .back-to-top:hover{border-color:var(--hot);color:var(--hot);}
+  .back-to-top svg{width:18px;height:18px;}
+  @media (max-width:600px){ .back-to-top{width:48px;height:48px;right:16px;bottom:18px;} }
 </style>
 
   <!-- ============ NAV ============ -->
@@ -710,6 +728,10 @@
     </div>
   </footer>
 
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+  </button>
+
 <script>
 (function(){
   var track = document.getElementById('vidTrack');
@@ -738,5 +760,21 @@
   track.addEventListener('scroll', updateProgress, {passive:true});
   window.addEventListener('resize', updateProgress);
   updateProgress();
+})();
+</script>
+
+<script>
+(function(){
+  var btn = document.getElementById('backToTop');
+  if(!btn) return;
+  function update(){
+    if(window.scrollY > 420){ btn.classList.add('show'); }
+    else { btn.classList.remove('show'); }
+  }
+  btn.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+  window.addEventListener('scroll', update, {passive:true});
+  update();
 })();
 </script>
