@@ -123,7 +123,9 @@
   .featured-label .line{height:1px;width:23px;background:rgba(52,19,39,.22);}
   .featured-label span{font-family:'Manrope',sans-serif;font-weight:700;font-size:5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);opacity:.72;}
   .featured-logos{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:13px 30px;}
-  .featured-logos img{display:block;width:auto;opacity:.82;}
+  .featured-logos a{display:block;line-height:0;text-decoration:none;}
+  .featured-logos img{display:block;width:auto;opacity:.82;transition:opacity .2s ease;}
+  .featured-logos a:hover img{opacity:1;}
   .featured-logos .logo-bustle{height:17px;}
   .featured-logos .logo-unwell{height:22px;}
   @media (max-width:640px){
@@ -394,8 +396,12 @@
         <span class="line"></span>
       </div>
       <div class="featured-logos">
-        <img class="logo-bustle" src="bustle.png" alt="Bustle" loading="lazy">
-        <img class="logo-unwell" src="unwell-network.png" alt="Unwell Network" loading="lazy">
+        <a href="https://www.bustle.com/entertainment/reality-tv-divorce-breakups-podcasts" target="_blank" rel="noopener noreferrer">
+          <img class="logo-bustle" src="bustle.png" alt="Bustle" loading="lazy">
+        </a>
+        <a href="https://www.instagram.com/p/DE0Ec3jy8ww/" target="_blank" rel="noopener noreferrer">
+          <img class="logo-unwell" src="unwell-network.png" alt="Unwell Network" loading="lazy">
+        </a>
       </div>
     </div>
   </section>
