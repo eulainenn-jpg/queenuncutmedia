@@ -308,21 +308,21 @@
 
   /* ---------- BACK TO TOP ---------- */
   .back-to-top{
-    position:fixed;right:24px;bottom:28px;z-index:100;
+    position:fixed;right:24px;top:50%;z-index:100;
     display:flex;align-items:center;justify-content:center;
     width:56px;height:56px;border-radius:50%;
     background:var(--paper);color:var(--wine);
     border:2px solid var(--blush);
     box-shadow:0 10px 24px rgba(110,14,58,.18);
     cursor:pointer;
-    opacity:0;transform:translateY(16px) scale(.9);
+    opacity:0;transform:translateY(-50%) translateY(16px) scale(.9);
     pointer-events:none;
     transition:opacity .25s ease, transform .25s ease, border-color .15s ease, color .15s ease;
   }
-  .back-to-top.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+  .back-to-top.show{opacity:1;transform:translateY(-50%) translateY(0) scale(1);pointer-events:auto;}
   .back-to-top:hover{border-color:var(--hot);color:var(--hot);}
   .back-to-top svg{width:18px;height:18px;}
-  @media (max-width:600px){ .back-to-top{width:48px;height:48px;right:16px;bottom:18px;} }
+  @media (max-width:600px){ .back-to-top{width:48px;height:48px;right:16px;} }
 </style>
 
   <!-- ============ NAV ============ -->
